@@ -1,6 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-prototype-builtins */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import {
   Card,
   CardContent,
@@ -10,7 +8,6 @@ import {
 } from '@/components/ui/card'
 import ThemeSwitch from '@/components/theme-switch'
 import { TopNav } from '@/components/top-nav'
-import { UserNav } from '@/components/user-nav'
 import { Layout, LayoutBody, LayoutHeader } from '@/components/custom/layout'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -42,22 +39,11 @@ export default function Dashboard() {
       message: 'prompt must be at least 2 characters.',
     }),
   })
-  const FormSchemaEx = z.object({
-    expended_query: z.string().min(2, {
-      message: 'prompt must be at least 2 characters.',
-    }),
-  })
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       prompt: '',
-    },
-  })
-  const formEX = useForm<z.infer<typeof FormSchemaEx>>({
-    resolver: zodResolver(FormSchemaEx),
-    defaultValues: {
-      expended_query: '',
     },
   })
 
