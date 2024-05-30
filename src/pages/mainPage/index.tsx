@@ -60,12 +60,11 @@ export default function Dashboard() {
       })
       .then((res) => {
         setResult(res.data)
-        console.log(res.data.expanded_query?.split(':').slice(-1)[0])
 
         if (res.data.expanded_query) {
           setValues({
             ...values,
-            expended_query: res.data.expanded_query.split(':').slice(-1)[0],
+            expended_query: res.data.expanded_query.split('=').slice(-1)[0],
           })
         }
         toast({
@@ -137,10 +136,11 @@ export default function Dashboard() {
                     />
 
                     <div>
+                    <div className="text-lg font-semibold"> Output : </div>
                       {result.expanded_query && (
                         <code className='relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold'>
                           {result
-                            ? result?.expanded_query?.split(':').slice(-1)[0]
+                            ? result?.expanded_query?.split('=').slice(-1)[0]
                             : ''}
                         </code>
                       )}
@@ -151,34 +151,25 @@ export default function Dashboard() {
                   </form>
                 </Form>
               </div>
-              <div className='py-[30px]'>
-                {result.expanded_query && (
-                  <code className='relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold'>
-                    {result
-                      ? result?.expanded_query?.split(':').slice(-1)[0]
-                      : ''}
-                  </code>
-                )}
-              </div>
             </div>
             <br />
             <Separator />
             <div>
               <CardHeader className='pl-0'>
-                <CardTitle>Product Search With Expended Query</CardTitle>
+                <CardTitle>Product Search With Expanded Query</CardTitle>
                 <CardDescription>
-                  Please enter a expended query to generate a response.
+                  Please enter a expanded query to generate a response.
                 </CardDescription>
               </CardHeader>
             </div>
             <div className='grid grid-flow-row-dense grid-cols-2'>
               <div>
                 <div className=' w-full max-w-sm items-center space-y-3'>
-                  <Label htmlFor='query'>Expended Query</Label>
+                  <Label htmlFor='query'>Expanded Query</Label>
                   <Input
                     type='text'
                     className='w-[500px]'
-                    placeholder='Expended Query...'
+                    placeholder='Expanded Query...'
                     value={values.expanded_query}
                     onChange={handleChange}
                   />
