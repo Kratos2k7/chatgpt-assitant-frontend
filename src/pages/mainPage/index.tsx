@@ -64,7 +64,7 @@ export default function Dashboard() {
         if (res.data.expanded_query) {
           setValues({
             ...values,
-            expended_query: res.data.expanded_query.split('=').slice(-1)[0],
+            expended_query: res?.data?.expanded_query?.split(result?.expanded_query?.includes('=') ? '=' : ':').slice(-1)[0],
           })
         }
         toast({
@@ -140,7 +140,7 @@ export default function Dashboard() {
                       {result.expanded_query && (
                         <code className='relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold'>
                           {result
-                            ? result?.expanded_query?.split('=').slice(-1)[0]
+                            ? result?.expanded_query?.split(result?.expanded_query?.includes('=') ? '=' : ':')?.slice(-1)[0]
                             : ''}
                         </code>
                       )}
